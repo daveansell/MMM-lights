@@ -12,7 +12,6 @@ module.exports = NodeHelper.create({
 	                        __dirname + "/lights.py",
 
 	]);
-	console.log(lights);
 	lights.stdin.setEncoding('utf-8');
 	lights.stdin.write("0\n");
     	child.stdout.on("exit", function(exitCode) {
