@@ -3,6 +3,7 @@ import board
 import neopixel
 import os
 import sys
+import subprocess
 
 # Turns on and off a strip of neopixels, and the Pi's leds
 
@@ -21,14 +22,16 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.2, auto_write=Fal
 
 while True:
     ch = os.read(sys.stdin.fileno(), 1)
-    print (ch) 
+#    print (ch) 
     if ch==b'1':
-        print ("on")
+#        print ("on")
         pixels.fill((255, 255, 255))
-        os.system(directory+"/ledsOn")
+#        os.system(directory+"/ledsOn")
+        p = subprocess.Popen(directory+"/ledsOn", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     elif ch==b'0':
         pixels.fill((0,0,0))
-        os.system(directory+"/ledsOff")
+ #       os.system(directory+"/ledsOff")
+        p = subprocess.Popen(directory+"/ledsOff", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     elif ch==b'q':
         sys.exit()
     pixels.show()
